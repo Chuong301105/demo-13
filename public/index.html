@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Care Services</title>
+    <title>PetMart Services</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Thanh điều hướng -->
     <header>
-        <nav>
-            <div class="logo">PetCare</div>
+        <nav class="navbar">
+            <div class="logo">PetMart</div>
             <ul class="nav-links">
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="#services">Dịch vụ</a></li>
                 <li><a href="#products">Sản phẩm</a></li>
-                <li><a href="#service-booking">Liên hệ</a></li>
+                <li> <a href="#service-booking" class="book-button">Book ngay</a></li>
                 <li><a href="#" id="loginButton">Đăng nhập</a></li>
             </ul>
         </nav>
@@ -24,13 +24,17 @@
     
 <div id="mainContent">
     <!-- Banner chính -->
-    <section id="home" class="banner">
-        <div class="banner-text">
-            <h1>Chăm Sóc Thú Cưng Chuyên Nghiệp</h1>
-            <p>Chúng tôi mang đến dịch vụ chăm sóc tốt nhất cho thú cưng của bạn.</p>
-            <a href="#services" class="btn">Khám phá dịch vụ</a>
-        </div>
-    </section>
+    <div class="banner-container">
+        <section id="home" class="banner">
+            <div class="banner-text">
+            
+            <!--<a href="#services" class="btn">Khám phá dịch vụ</a>-->
+            </div>
+        </section>
+    </div>
+    <br>
+    <h1>Chăm Sóc Thú Cưng Chuyên Nghiệp</h1>
+            <!--<p>Chúng tôi mang đến dịch vụ chăm sóc tốt nhất cho thú cưng của bạn.</p>-->
 
     <!-- Khu vực dịch vụ -->
     <section id="services" class="services">
@@ -115,7 +119,7 @@
                 <option value="yes">Có</option>
             </select>
     
-            <label for="pickUpService">Đón bé tại nhà</label>
+            <label for="pickUpService">Đưa đón tận nơi</label>
             <select id="pickUpService" name="pickUpService">
                 <option value="no">Không</option>
                 <option value="yes">Có</option>
@@ -132,6 +136,20 @@
         </form>
         <p id="responseMessage"></p>
     </section>    
+</div>
+   <!-- Receipt Modal -->
+<div id="receipt-modal" class="receipt-modal">
+    <h2>Receipt</h2>
+    <div id="service-summary"></div> <!-- Hiển thị thông tin dịch vụ đã chọn -->
+    <div class="total-price">
+        <p>Total: <span id="total"></span></p> <!-- Hiển thị tổng chi phí -->
+    </div>
+    <label for="payment-method">Chọn phương thức thanh toán:</label>
+    <select id="payment-method">
+        <option value="cash">Cash</option>
+        <option value="online">Online Payment</option>
+    </select>
+    <button id="order-btn">Order</button> <!-- Nút để xử lý đặt hàng -->
 </div>
     <!-- Modal Đăng nhập/Đăng ký -->
     <div id="authModal" class="modal">
@@ -176,7 +194,7 @@
     
     <!-- Chân trang -->
     <footer>
-        <p>© 2023 PetCare. All Rights Reserved.</p>
+        <p>© 2024 PetMart. All Rights Reserved.</p>
     </footer>
     <!-- JavaScript -->
     <script src="script.js"></script> <!-- Kết nối với file JS để xử lý form -->

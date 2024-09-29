@@ -1,221 +1,290 @@
-/* General styling */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-/* Header styling */
-header {
-    background-color: #4CAF50;
-    padding: 15px 20px;
-    color: white;
+/* Tổng quan cho thanh điều hướng */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
+    background-color: #3498db; /* Màu xanh dương cho thanh navbar */
+    padding: 10px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#navbar.scrolled {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-    background-color: #4CAF50;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    transition: all 0.5s ease;
-}
-
-#navbar.scrolled .logo {
-    display: none;
-}
-
-#navbar.scrolled::before {
-    content: "PETCARE";
-    color: white;
+.logo a {
+    font-size: 24px;
     font-weight: bold;
-}
-
-.logo {
-    font-size: 1.8em;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: opacity 0.3s ease;
+    color: white;
+    text-decoration: none;
 }
 
 .nav-links {
-    list-style-type: none;
+    list-style: none;
     display: flex;
+    gap: 20px;
 }
 
 .nav-links li {
-    display: inline-block;
-    margin-left: 20px;
+    display: inline;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    font-size: 1.1em;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .nav-links a:hover {
-    color: #f0f0f0;
+    background-color: #2980b9; /* Đổi màu khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+    border-radius: 4px;
 }
 
-/* Progress bar styling */
-.progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 25px;
-    margin-top: 20px;
+/* Khu vực thông tin tài khoản */
+.account-section {
+    position: relative;
 }
 
-.progress-bar {
-    width: 50%;
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 25px;
-    text-align: center;
-    line-height: 20px;
+.dropdown-button {
+    background-color: #e74c3c; /* Nền đỏ cho nút dropdown */
     color: white;
-}
-
-/* Center content in dashboard */
-.dashboard-section {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
-.card {
-    width: 100%;
-    max-width: 300px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-button.btn-primary {
-    background-color: #4CAF50;
+    padding: 10px 15px;
     border: none;
-    padding: 10px 20px;
-    color: white;
-    font-size: 1em;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button.btn-primary:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-/* Ẩn các mục khi thanh navigation biến thành hình tròn */
-#navbar.scrolled .nav-links {
-    display: none;
-}
-
-/* Main content styling */
-main {
-    padding: 120px 20px; /* Padding để tránh đè lên header */
-    background-color: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    max-width: 1200px;
-    margin: 20px auto;
-}
-
-/* Dashboard sections */
-.dashboard-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px;
-}
-
-.card {
-    background-color: #fafafa;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    flex: 1;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    background-color: #f0f0f0;
-}
-
-h3 {
-    color: #4CAF50;
-    font-size: 1.6em;
-}
-
-button {
-    padding: 12px 25px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1em;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-/* Progress bar styling */
-.progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 25px;
-    margin-top: 20px;
-}
-
-.progress-bar {
-    width: 0%; /* Dynamic width based on points */
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 25px;
-    text-align: center;
-    line-height: 20px;
-    color: white;
-    transition: width 0.3s ease;
-}
-
-/* Footer styling */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9em;
-    width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-footer p {
-    margin: 0;
-    letter-spacing: 1px;
+.dropdown-button:hover {
+    background-color: #c0392b; /* Màu nền khi hover */
 }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.account-section:hover .dropdown-content {
+    display: block;
+}
+
+/* Layout chung */
+.dashboard-container {
+    display: flex;
+    height: calc(100vh - 60px); /* Chiều cao trừ đi chiều cao của navbar */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px; /* Tăng chiều rộng để có nhiều không gian hơn */
+    background-color: #ecf0f1; /* Màu nền nhẹ hơn */
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #3498db;
+    color: white;
+}
+/* Hiển thị mục đang được chọn */
+.sidebar ul li a.active {
+    background-color: #3498db; /* Màu nền khi mục được chọn */
+    color: white; /* Màu chữ khi mục được chọn */
+    font-weight: bold; /* Làm đậm chữ */
+    border-left: 4px solid #2980b9; /* Đường viền bên trái để làm nổi bật */
+}
+/* Các phần nội dung ẩn mặc định */
+.notifications-section,
+.orders-section,
+.voucher-section {
+    display: none;
+}
+
+/* Nội dung video cho Pet Hotel */
+#liveCamera {
+    width: 100%;
+    max-width: 800px; /* Giới hạn chiều rộng của video */
+    height: auto;
+    border: 2px solid #ccc;
+    margin: 20px 0;
+    border-radius: 10px; /* Bo tròn góc video */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ cho video */
+}
+
+/* Nút bấm dưới video căn sang bên trái */
+#talkToPetButton {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    display: block;
+    margin: 20px 0; /* Khoảng cách phía trên và dưới */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+    width: fit-content; /* Đảm bảo nút có chiều rộng phù hợp với nội dung */
+}
+
+/* Đặt nút bên trái */
+#talkToPetButton-container {
+    display: flex;
+    justify-content: flex-start; /* Căn bên trái */
+}
+
+/* Main content */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100%;
+}
+
+/* Hồ sơ thông tin người dùng và các phần khác */
+.profile-section, .notifications-section, .orders-section, .voucher-section {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.profile-section h2, .notifications-section h2, .orders-section h2, .voucher-section h2 {
+    margin-bottom: 20px;
+    color: #34495e;
+    font-size: 24px;
+}
+
+.profile-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.profile-section input[type="text"], .profile-section input[type="email"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-section input[type="radio"] {
+    margin-right: 10px;
+}
+
+.profile-section button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-section button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+/* Dịch vụ đã sử dụng và đang sử dụng */
+.service-table {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px auto;
+    width: 80%;
+}
+
+.service-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ */
+    width: 45%;
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.service-box h3 {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.service-box p {
+    font-size: 16px;
+    color: #555;
+}
+/* Định dạng cho các liên kết trong phần dịch vụ */
+.service-box a {
+    text-decoration: none; /* Xóa dấu gạch chân */
+    color: #6a1b9a; /* Màu tím cho liên kết */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Hiệu ứng khi hover vào liên kết */
+.service-box a:hover {
+    color: #4a148c; /* Đổi màu khi hover */
+    text-decoration: underline; /* Hiển thị dấu gạch chân khi hover nếu muốn */
+}
+
+
+

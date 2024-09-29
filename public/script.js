@@ -10,7 +10,6 @@ function getRandomColor() {
     }
     return color;
 }
-
 // Xử lý cuộn trang
 window.addEventListener('scroll', function () {
     const nav = document.querySelector('header');
@@ -21,11 +20,17 @@ window.addEventListener('scroll', function () {
     } else {
         nav.style.backgroundColor = ''; // Trả về màu mặc định
         nav.classList.remove('scrolled'); // Trả về trạng thái ban đầu
+        nav.classList.remove('nav-bar'); // Xóa class nav-bar nếu có khi cuộn lên trên
     }
 });
-
-
-
+// Xử lý click vào header khi ở trạng thái hình tròn
+document.querySelector('header').addEventListener('click', function () {
+    const nav = document.querySelector('header');
+    if (nav.classList.contains('scrolled')) {
+        nav.classList.remove('scrolled'); // Xóa class hình tròn
+        nav.classList.add('nav-bar'); // Thêm class nav-bar để biến thành thanh nav
+    }
+});
     // Hiển thị modal đăng nhập/đăng ký
     const loginButton = document.getElementById('loginButton');
     const authModal = document.getElementById('authModal');
@@ -159,13 +164,13 @@ window.addEventListener('scroll', function () {
                 responseMessage.style.display = 'block';
 
                 // Reset form sau khi gửi
-                form.reset();
+               /* form.reset();
                 addressField.style.display = 'none';
                 otherPetType.style.display = 'none';
             } else {
                 responseMessage.textContent = `Có lỗi xảy ra: ${data.message}`;
                 responseMessage.style.color = 'red';
-                responseMessage.style.display = 'block';
+                responseMessage.style.display = 'block';*/
             }
 
             // Ẩn thông báo sau 5 giây
@@ -186,7 +191,149 @@ window.addEventListener('scroll', function () {
             }, 5000);
         });
     });
+// Định nghĩa hàm calculateTotal() bên ngoài, để có thể sử dụng lại ở các hàm khác
+function calculateTotal() {
+    let total = 0; // Biến tổng ban đầu
+    // Lấy tất cả các dịch vụ được chọn từ form
+    const services = document.querySelectorAll('input[name="services"]:checked');
+    
+    // Duyệt qua các dịch vụ đã chọn và cộng giá tương ứng
+    services.forEach(service => {
+        if (service.value === 'Spa') total += 500000; // Giá dịch vụ Spa
+        if (service.value === 'Training') total += 700000; // Giá dịch vụ Huấn luyện
+        if (service.value === 'Boarding') total += 800000; // Giá dịch vụ Giữ thú cưng
+    });
+    
+    return total; // Trả về tổng số tiền
+}
+ // Lắng nghe sự kiện 'submit' của form
+document.getElementById('serviceForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn việc submit form
 
+    // Hàm tính tổng chi phí dựa trên dịch vụ đã chọn
+    function calculateTotal() {
+        let total = 0; // Biến tổng ban đầu
+        // Lấy tất cả các dịch vụ được chọn từ form
+        const services = document.querySelectorAll('input[name="services"]:checked');
+        
+        // Duyệt qua các dịch vụ đã chọn và cộng giá tương ứng
+        services.forEach(service => {
+            if (service.value === 'Spa') total += 500000; // Giá dịch vụ Spa
+            if (service.value === 'Training') total += 700000; // Giá dịch vụ Huấn luyện
+            if (service.value === 'Boarding') total += 800000; // Giá dịch vụ Giữ thú cưng
+        });
+        
+        return total; // Trả về tổng số tiền
+    }
+
+    // Hiển thị thông tin dịch vụ và tổng tiền trong biên lai (modal)
+    function displayReceipt() {
+        let total = calculateTotal();  // Tính tổng chi phí
+        let summary = '';  // Khởi tạo biến summary để lưu thông tin dịch vụ đã chọn
+        
+        // Lấy tất cả các dịch vụ đã chọn
+        const services = document.querySelectorAll('input[name="services"]:checked');
+        
+        // Duyệt qua các dịch vụ đã chọn và thêm vào chuỗi summary
+        services.forEach(service => {
+            if (service.value === 'Spa') summary += 'Spa: 500,000 VND<br>';
+            if (service.value === 'Training') summary += 'Huấn luyện: 700,000 VND<br>';
+            if (service.value === 'Boarding') summary += 'Giữ thú cưng: 800,000 VND<br>';
+        });
+    
+        // Cập nhật thông tin trong modal
+        document.getElementById('service-summary').innerHTML = summary;
+        document.getElementById('total').textContent = total.toLocaleString() + ' VND';
+
+        // Hiển thị modal với lớp show (sử dụng CSS để điều khiển hiển thị)
+        document.getElementById('receipt-modal').classList.add('show');
+    }
+
+    // Hiển thị hóa đơn sau khi nhấn submit
+    displayReceipt();
+});
+
+// Khi nhấn nút "Order"
+document.getElementById('order-btn').addEventListener('click', function(event) {
+    event.preventDefault(); // Ngăn chặn hành động mặc định
+
+    // Thu thập dữ liệu từ form
+    const paymentMethod = document.getElementById('payment-method').value;
+
+    // Gửi thông tin hóa đơn về SQL
+    saveInvoice().then(() => {
+        if (paymentMethod === 'online') {
+            // Thanh toán online qua PayPal
+            calculateAndPay(); // Chuyển hướng đến trang thanh toán PayPal
+        } else {
+            // Thanh toán tiền mặt
+            alert('Đặt hàng thành công với thanh toán tiền mặt.');
+        }
+
+        // Ẩn biên lai khi hoàn tất đặt hàng
+        document.getElementById('receipt-modal').classList.remove('show');
+    }).catch(error => {
+        console.error('Lỗi khi lưu hóa đơn:', error);
+        alert('Có lỗi xảy ra khi lưu hóa đơn!');
+    });
+});
+
+// Hàm lưu hóa đơn vào MySQL
+function saveInvoice() {
+    // Thu thập dữ liệu từ form và biên lai
+    const invoiceData = {
+        customer_name: document.getElementById('name').value,
+        customer_phone: document.getElementById('phone').value,
+        customer_email: document.getElementById('email').value,
+        pet_type: document.getElementById('pet').value,
+        services: getSelectedServices(), // Hàm lấy dịch vụ đã chọn
+        total: calculateTotal(), // Tính tổng chi phí
+        payment_method: document.getElementById('payment-method').value // Lấy phương thức thanh toán
+    };
+
+    // Gửi dữ liệu tới server (API save-invoice)
+    return fetch('/save-invoice', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(invoiceData)
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        if (!data.success) {
+            throw new Error('Error from server: ' + data.message);
+        }
+        console.log('Invoice saved successfully:', data);
+    });
+}
+
+// Hàm lấy các dịch vụ đã chọn
+function getSelectedServices() {
+    const selectedServices = [];
+    document.querySelectorAll('input[name="services"]:checked').forEach(checkbox => {
+        selectedServices.push(checkbox.value);
+    });
+    return selectedServices.join(', '); // Trả về chuỗi các dịch vụ đã chọn
+}
+
+// Hàm thanh toán qua PayPal
+function calculateAndPay() {
+    let total = calculateTotal(); // Sử dụng hàm calculateTotal() để lấy tổng chi phí
+
+    // Chuyển đổi sang USD, ví dụ tỷ giá là 23,000 VND = 1 USD
+    const exchangeRate = 23000;
+    const totalInUSD = (total / exchangeRate).toFixed(2);
+
+    // Tạo liên kết PayPal với số tiền đã tính
+    const paypalLink = `https://paypal.me/petcare172/${totalInUSD}`;
+
+    // Chuyển hướng đến PayPal để thanh toán
+    window.location.href = paypalLink;
+}
     // Xử lý form đăng ký tài khoản
     registerForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -264,59 +411,42 @@ window.addEventListener('scroll', function () {
         });
     });
 
-    // Xử lý form đăng nhập
-    loginForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Ngăn chặn form tự động reload
+   // Xử lý form đăng nhập
+loginForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Ngăn chặn form tự động reload
 
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
 
-        const loginData = {
-            email: email,
-            password: password
-        };
+    const loginData = {
+        email: email,
+        password: password
+    };
 
-        // Gửi yêu cầu đăng nhập đến API
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Lỗi mạng khi đăng nhập');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const loginMessage = document.getElementById('loginMessage');
-            if (data.success) {
-                loginMessage.textContent = 'Đăng nhập thành công!';
-                loginMessage.style.color = 'green';
-                loginMessage.style.display = 'block';
-        
-                // Lưu thông tin người dùng vào localStorage
-                localStorage.setItem('user', JSON.stringify(data.user));
-        
-                // Chuyển hướng đến trang dashboard.html
-                window.location.href = 'dashboard.html';
-            } else {
-                loginMessage.textContent = `Đăng nhập thất bại: ${data.message}`;
-                loginMessage.style.color = 'red';
-                loginMessage.style.display = 'block';
-            }
-        
-            setTimeout(() => {
-                loginMessage.style.display = 'none';
-            }, 5000);
-        })
-        .catch(error => {
-            const loginMessage = document.getElementById('loginMessage');
-            loginMessage.textContent = 'Đã xảy ra lỗi khi đăng nhập!';
-            loginMessage.style.color = 'red';
-            loginMessage.style.display = 'block';
-        });        
+    // Gửi yêu cầu đăng nhập đến API
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Lưu thông tin người dùng vào localStorage
+            localStorage.setItem('userId', data.user.id);
+            localStorage.setItem('username', data.user.username);
+
+            // Chuyển hướng đến trang dashboard.html
+            window.location.href = 'dashboard.html';
+        } else {
+            alert('Đăng nhập thất bại: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Lỗi mạng khi đăng nhập:', error);
     });
-});
+})})
+
+

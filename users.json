@@ -130,5 +130,17 @@
     "username": "11",
     "email": "1@11.com",
     "password": "$2b$10$CXJLesqRGZ12W8SD6ZY0yuWj0opNSJWyg52YbFHwPxl2uQZhuRpEG"
+  },
+  {
+    "id": "6d332c4b-0892-4d91-bb68-d10cc2848f66",
+    "username": "Nguyên",
+    "email": "nguyen123@gmail.com",
+    "password": "$2b$10$QVvw5HrppRRNbtRquL9Wn.N1kZsVi3UqtvKgm99XycOa5ikr7yU0G"
+  },
+  {
+    "id": "50c3c664-37a1-4cf7-be6e-d1d2a8fb9558",
+    "username": "Mam",
+    "email": "ngoc321@gmail.com",
+    "password": "$2b$10$ogatWeBt3YFUD851hv/TO.OAphZAewjJd5cIhYO0qMkcjsLPOT7HC"
   }
 ]

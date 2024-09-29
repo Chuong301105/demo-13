@@ -3,77 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>User Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-
-    <!-- Header với thanh điều hướng -->
+    <!-- Header -->
     <header>
-        <nav id="navbar">
-            <div class="logo" id="logoText">PetCare</div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">PetMart</a>
+            </div>
             <ul class="nav-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Dịch vụ</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#" id="logoutButton">Đăng xuất</a></li>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="#about">Về chúng tôi</a></li> <!-- Thêm mục Về chúng tôi -->
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="#booking" class="booking-btn">Book ngay</a></li> <!-- Thêm mục Booking -->
             </ul>
+            <div class="account-section">
+                <button class="dropdown-button" id="userButton"></button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="#" id="profileLink">Thông tin tài khoản</a>
+                    <a href="#" id="logoutLink">Đăng xuất</a>
+                </div>
+            </div>
         </nav>
-    </header>
-        
-    <!-- Nội dung chính của dashboard -->
-    <main>
-        <h1>Chào mừng bạn đến với Dashboard!</h1>
-        <p>Đây là nội dung đặc biệt dành cho người dùng đã đăng nhập.</p>
-        <p>Bạn có thể quản lý dịch vụ thú cưng và xem các thông tin cá nhân tại đây.</p>
+    </header>    
 
-        <!-- Giao diện sau khi đăng nhập -->
-        <div class="dashboard-section">
-            <div class="card">
-                <div class="card-header">
-                    <img src="gift-icon.png" alt="Gift Icon" class="card-icon">
-                    <h3>Ưu đãi của bạn</h3>
-                </div>
-                <div class="card-body">
-                    <p>Điểm tích lũy: <span id="loyaltyPoints">0</span></p>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progressBar">0%</div>
+    <!-- Sidebar và Main Content -->
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" id="accountInfoLink" class="active">Thông tin tài khoản</a></li>
+                <li><a href="#" id="notificationsLink">Thông báo</a></li>
+                <li><a href="#" id="ordersLink">Đơn mua</a></li>
+                <li><a href="#" id="voucherLink">Kho voucher</a></li>
+                <li><a href="#" id="servicesLink">Dịch vụ của bạn</a></li>
+            </ul>            
+        </aside>
+    
+        <main class="content" id="content">
+            <!-- Nội dung bảng thông tin tài khoản -->
+            <div class="profile-section" id="profileSection">
+                <h2>Hồ Sơ Của Tôi</h2>
+                <form id="profileForm">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" disabled>
+                
+                    <label for="name">Tên:</label>
+                    <input type="text" id="name">
+                
+                    <label for="address">Địa chỉ:</label> <!-- Thêm trường Địa chỉ -->
+                    <input type="text" id="address"> <!-- Input cho Địa chỉ -->
+                
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone">
+                
+                    <label>Giới tính:</label>
+                    <input type="radio" name="gender" value="male"> Nam
+                    <input type="radio" name="gender" value="female"> Nữ
+                    <input type="radio" name="gender" value="other"> Khác
+                
+                    <button type="submit">Lưu</button>
+                </form>                
+            </div>
+            <!-- Nội dung giả lập cho các mục "Thông báo", "Đơn mua", "Kho voucher" -->
+            <div class="notifications-section" id="notificationsSection" style="display:none;">
+                <h2>Thông Báo</h2>
+                <p>Hiện tại không có thông báo mới.</p>
+            </div>
+    
+            <div class="orders-section" id="ordersSection" style="display:none;">
+                <h2>Đơn Mua</h2>
+                <p>Không có đơn hàng nào gần đây.</p>
+            </div>
+    
+            <div class="voucher-section" id="voucherSection" style="display:none;">
+                <h2>Kho Voucher</h2>
+                <p>Không có voucher nào khả dụng.</p>
+            </div>
+             <!-- Thêm phần Dịch vụ của bạn -->
+             <div class="services-section" id="servicesSection" style="display:none;">
+                <div class="service-table">
+                    <div class="service-box">
+                        <h3><a href="#" id="pastServicesLink">Dịch vụ đã sử dụng</a></h3>
+                        <p>Không có dịch vụ nào được sử dụng.</p> <!-- Bạn có thể thêm nội dung thực tế -->
                     </div>
-                    <p>Các ưu đãi hiện tại: <span id="userDiscounts">Không có ưu đãi nào</span></p>
-                </div>
+                
+                    <div class="service-box">
+                        <h3><a href="#" id="currentServicesLink">Dịch vụ đang sử dụng</a></h3>
+                        <p>Pet Hotel - Đang hoạt động</p> <!-- Bạn có thể thêm nội dung thực tế -->
+                    </div>
+                </div>                
             </div>
-        </div>
 
-        <div class="dashboard-section">
-            <div class="card">
-                <div class="card-header">
-                    <img src="shopping-cart-icon.png" alt="Shopping Cart Icon" class="card-icon">
-                    <h3>Mua sắm sản phẩm</h3>
-                </div>
-                <div class="card-body">
-                    <button class="btn-primary" onclick="window.location.href='/products'">Mua sắm ngay</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="dashboard-section">
-            <div class="card">
-                <div class="card-header">
-                    <img src="pet-icon.png" alt="Pet Icon" class="card-icon">
-                    <h3>Theo dõi thú cưng của bạn</h3>
-                </div>
-                <div class="card-body">
-                    <p>Tên thú cưng: <span id="petName">Chưa có thú cưng</span></p>
-                    <p>Mức độ thân thiết với shop: <span id="loyaltyLevel">Chưa xác định</span></p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>© 2023 PetCare. All Rights Reserved.</p>
-    </footer>
-
+            <!-- Dịch vụ đang sử dụng: Pet Hotel -->
+            <div class="pet-hotel-section" id="petHotelSection" style="display:none;">
+                <h2>Pet Hotel</h2>
+                <h3>Xem hình ảnh thú cưng của bạn</h3>
+                <!-- Video live camera -->
+                <video id="liveCamera" controls autoplay>
+                    <source src="camera_feed.mp4" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ phát video.
+                </video>
+                <!-- Nút bấm để nói chuyện với thú cưng -->
+                <button id="talkToPetButton">Bấm để nói chuyện với thú cưng</button>
+            </div>            
+        </main>
+    </div>
     <script src="dashboard.js"></script>
 </body>
 </html>

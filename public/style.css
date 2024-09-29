@@ -65,6 +65,45 @@ nav {
     align-items: center;
     padding: 10px 20px;
 }
+/* Định dạng thanh menu */
+.navbar {
+    background-color: #00b4ff; /* Màu nền xanh */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Định dạng cho các liên kết trong menu */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+/* Định dạng nút Book ngay */
+.book-button {
+    background-color: #f28b82; /* Màu nền của nút */
+    color: white;
+    font-weight: bold; /* Chữ in đậm */
+    padding: 10px 20px; /* Khoảng cách bên trong nút */
+    text-align: center; /* Căn giữa chữ */
+    text-decoration: none; /* Loại bỏ gạch dưới */
+    border-radius: 10px; /* Góc bo tròn */
+    display: inline-block;
+}
+
+.book-button:hover {
+    background-color: #ff5252; /* Màu nền khi hover */
+}
+
+/* Định dạng container chứa logo và các liên kết */
+.navbar-items {
+    display: flex;
+    gap: 15px;
+}
 
 nav .logo {
     font-size: 1.8rem;
@@ -132,15 +171,24 @@ nav ul li a:hover {
 
 
 /* Banner styles */
+/* Nền trắng cho container */
+.banner-container {
+    background-color: white;
+    height: 60vh; /* Chiều cao toàn màn hình */
+    position: relative; /* Để các phần tử con có thể được đặt bằng position:absolute */
+}
+
+/* Banner sẽ đè lên container */
 .banner {
-    background: url('banner.jpg') no-repeat center center/cover;
-    position: relative;
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
+    background: url('banner.jpg') no-repeat center center;
+    background-size: contain; /* Giữ nguyên tỷ lệ hình ảnh */
+    width: 60%; /* Chiều rộng của banner */
+    height: 50vh; /* Chiều cao của banner */
+    position: absolute; /* Banner sẽ đè lên container */
+    top: 50%; /* Đặt vị trí cách phía trên container 50% */
+    left: 50%; /* Đặt vị trí cách phía trái container 50% */
+    transform: translate(-50%, -50%); /* Căn giữa theo cả chiều ngang và dọc */
+    z-index: 1; /* Giúp banner đè lên container */
 }
 
 .banner::before {
@@ -157,11 +205,11 @@ nav ul li a:hover {
 .banner-text {
     position: relative;
     z-index: 2;
-    color: #fff;
+    color: #141111;
 }
 
 .banner h1 {
-    font-size: 4rem;
+    font-size: 5em;
     font-weight: bold;
 }
 
@@ -274,6 +322,59 @@ nav ul li a:hover {
     color: green;
     font-weight: bold;
     text-align: center;
+}
+
+/* Định dạng cơ bản cho receipt modal */
+#receipt-modal {
+    position: fixed;
+    right: -100%; /* Ban đầu nằm ngoài màn hình */
+    top: 0;
+    height: 100%;
+    width: 400px;
+    background-color: white;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.5s ease; /* Hiệu ứng trượt */
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* Khi biên lai được hiển thị */
+#receipt-modal.show {
+    right: 0; /* Trượt vào màn hình từ bên phải */
+}
+/* CSS cho các thành phần trong biên lai */
+.receipt-modal h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+#service-summary {
+    margin-bottom: 20px;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#order-btn {
+    width: 100%;
+    background-color: #6200EA; /* Màu nút */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#order-btn:hover {
+    background-color: #3700B3; /* Màu khi hover */
+}
+
+.payment-options {
+    margin-top: 15px;
 }
 
 /* Hiển thị ẩn/hiện loại thú cưng khác */
@@ -420,5 +521,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px;
     text-align: center;
 }
-
+#paypal-button-container {
+    display: none;
+  }
+  
 /* Other styles ... */
+
+
