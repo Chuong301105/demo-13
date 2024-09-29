@@ -1,18 +1,29 @@
 /* Tổng quan cho thanh điều hướng */
+:root {
+    --primary-color: #3498db; /* Màu chính */
+    --secondary-color: #f39c12; /* Màu phụ */
+    --background-color: #f5f5f5; /* Màu nền */
+    --accent-color: #e74c3c; /* Màu nhấn */
+    --text-color: #ffffff; /* Màu chữ trắng */
+}
+
+/* Tổng quan cho thanh điều hướng */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3498db; /* Màu xanh dương cho thanh navbar */
-    padding: 10px 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Nền gradient */
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Bo tròn toàn bộ navbar */
 }
 
 .logo a {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
+    letter-spacing: 2px; /* Giãn cách chữ */
 }
 
 .nav-links {
@@ -26,18 +37,18 @@
 }
 
 .nav-links a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 4px;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 6px; /* Bo tròn các link */
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .nav-links a:hover {
-    background-color: #2980b9; /* Đổi màu khi hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2); /* Màu khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng khi hover */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
 }
 
 /* Khu vực thông tin tài khoản */
@@ -46,20 +57,23 @@
 }
 
 .dropdown-button {
-    background-color: #e74c3c; /* Nền đỏ cho nút dropdown */
-    color: white;
-    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 50px; /* Bo tròn cho nút */
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ cho nút */
 }
 
 .dropdown-button:hover {
-    background-color: #c0392b; /* Màu nền khi hover */
+    background-color: #e65d4d;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bóng đổ khi hover */
+    transform: scale(1.1); /* Tăng kích thước nhẹ khi hover */
 }
-
+/* Dropdown menu */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -68,7 +82,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .dropdown-content a {
@@ -96,7 +110,7 @@
 /* Sidebar */
 .sidebar {
     width: 220px; /* Tăng chiều rộng để có nhiều không gian hơn */
-    background-color: #ecf0f1; /* Màu nền nhẹ hơn */
+    background-color: #f3eef1; /* Màu nền nhẹ hơn */
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
@@ -122,12 +136,12 @@
 }
 
 .sidebar ul li a:hover {
-    background-color: #3498db;
+    background-color: #4a96c8;
     color: white;
 }
 /* Hiển thị mục đang được chọn */
 .sidebar ul li a.active {
-    background-color: #3498db; /* Màu nền khi mục được chọn */
+    background-color: #d834db; /* Màu nền khi mục được chọn */
     color: white; /* Màu chữ khi mục được chọn */
     font-weight: bold; /* Làm đậm chữ */
     border-left: 4px solid #2980b9; /* Đường viền bên trái để làm nổi bật */
@@ -152,7 +166,7 @@
 
 /* Nút bấm dưới video căn sang bên trái */
 #talkToPetButton {
-    background-color: #e74c3c;
+    background-color: #e76152;
     color: white;
     padding: 12px 25px;
     font-size: 16px;
@@ -182,7 +196,7 @@
 
 /* Hồ sơ thông tin người dùng và các phần khác */
 .profile-section, .notifications-section, .orders-section, .voucher-section {
-    background-color: white;
+    background-color: rgb(245, 203, 226);
     padding: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
