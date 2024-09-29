@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e788b8;
+    background-color: #f3b6f3;
     color: #333;
 }
 
@@ -266,7 +266,7 @@ nav ul li a:hover {
 }
 
 .product-item img {
-    width: 100%;
+    width: 50%;
     border-radius: 10px;
 }
 
@@ -526,5 +526,32 @@ h1, h2, h3, h4, h5, h6 {
   }
   
 /* Other styles ... */
+/* Đảm bảo tất cả các hình ảnh trong dịch vụ và sản phẩm có cùng kích thước */
+.services-container, .products-container {
+    display: flex;
+    justify-content: space-around; /* Căn giữa các mục */
+    gap: 20px; /* Khoảng cách giữa các mục */
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu không đủ không gian */
+}
+
+.service-item, .product-item {
+    width: 300px; /* Đặt chiều rộng cố định cho mỗi mục */
+    text-align: center; /* Căn giữa nội dung */
+    margin-bottom: 20px; /* Khoảng cách dưới giữa các mục */
+}
+
+.service-item img, .product-item img {
+    width: 100%; /* Chiều rộng bằng 100% của phần tử cha */
+    height: 200px; /* Đặt chiều cao cố định cho hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị méo */
+    border-radius: 8px; /* Bo tròn góc nếu muốn */
+}
+
+.service-item h3, .product-item h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
 
 
