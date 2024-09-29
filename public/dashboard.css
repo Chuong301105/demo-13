@@ -110,7 +110,7 @@
 /* Sidebar */
 .sidebar {
     width: 220px; /* Tăng chiều rộng để có nhiều không gian hơn */
-    background-color: #f3eef1; /* Màu nền nhẹ hơn */
+    background-color: #e8d3df; /* Màu nền nhẹ hơn */
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
