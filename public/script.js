@@ -126,7 +126,7 @@ document.querySelector('header').addEventListener('click', function () {
             homeService: document.getElementById('homeService').value === 'yes' ? 'Có' : 'Không', // Thay đổi 'yes' thành 'Có'
             pickUpService: document.getElementById('pickUpService').value === 'yes' ? 'Có' : 'Không', // Thay đổi 'yes' thành 'Có'
             address: document.getElementById('address').value,
-            
+            inbox: document.getElementById('inbox').value
         };
     
         // Thu thập các dịch vụ đã chọn từ form
@@ -391,7 +391,7 @@ function calculateAndPay() {
                     authModal.classList.remove('active');
                     body.style.overflow = 'auto'; // Cho phép cuộn lại
                     registerResponseMessage.style.display = 'none'; // Ẩn thông báo sau 5 giây
-                }, 3000);
+                }, 1000);
             } else {
                 registerResponseMessage.textContent = `Đăng ký thất bại: ${data.message}`;
                 registerResponseMessage.style.color = 'red';
@@ -447,6 +447,37 @@ loginForm.addEventListener('submit', function (event) {
     .catch(error => {
         console.error('Lỗi mạng khi đăng nhập:', error);
     });
+
+    // Gửi dữ liệu tới máy chủ bằng Fetch API
+    fetch('/submit-inbox', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData) // Chuyển đổi formData thành JSON
+    })
+    .then(response => {
+        // Kiểm tra nếu server phản hồi thành công
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Parsed response:', data);
+        if (data.success) {
+            alert('Dữ liệu đã được gửi thành công!');
+        } else {
+            alert('Đã xảy ra lỗi khi gửi dữ liệu.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Đã xảy ra lỗi khi kết nối tới máy chủ.');
+    });
+
 })})
+
+    
 
 
