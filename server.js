@@ -1,3 +1,4 @@
+
 const express = require('express');
 const fs = require('fs').promises; // Sử dụng fs.promises để làm việc với async/await
 const bodyParser = require('body-parser');
@@ -301,10 +302,59 @@ app.post('/save-invoice', (req, res) => {
         res.status(200).json({ success: true, message: 'Hóa đơn đã được lưu thành công!' });
     });
 });
+// Route để nhận thông tin từ form
+app.post('/submit-message', (req, res) => {
+    const { email, message } = req.body;
 
+    // Log dữ liệu nhận được để kiểm tra
+    console.log('Received email:', email);
+    console.log('Received message:', message);
+
+    // Kiểm tra nếu email hoặc message bị thiếu
+    if (!email || !message) {
+        return res.status(400).json({ success: false, message: 'Email và message là bắt buộc.' });
+    }
+  
+    // Câu lệnh SQL để chèn dữ liệu vào bảng
+    const query = 'INSERT INTO customer_messages (email, message) VALUES (?, ?)';
+    
+    db.query(query, [email, message], (err, result) => {
+      if (err) {
+        console.error('Error inserting data into MySQL:', err);
+        return res.status(500).json({ success: false, message: 'Database error' });
+      }
+      // Thiết lập header Content-Type thành JSON
+      const response = { success: true, message: 'Dữ liệu đã được gửi và lưu thành công!' };
+      console.log('Server response:', response);  // Kiểm tra phản hồi trên máy chủ
+    
+      // Gửi phản hồi JSON
+      res.json(response);
+    });
+  });
 
 // Khởi động server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+// Xử lý yêu cầu POST tới endpoint '/submit-inbox'
+app.post('/submit-inbox', (req, res) => {
+    const { email, inbox } = req.body;
 
+    // Kiểm tra xem email và inbox có được cung cấp không
+    if (!email || !inbox) {
+        return res.status(400).json({ success: false, message: 'Email và inbox là bắt buộc.' });
+    }
+
+    // Câu lệnh SQL để chèn dữ liệu vào bảng customer_messages
+    const query = 'INSERT INTO customer_messages (email, inbox) VALUES (?, ?)';
+
+    db.query(query, [email, inbox], (err, result) => {
+        if (err) {
+            console.error('Error inserting data into MySQL:', err);
+            return res.status(500).json({ success: false, message: 'Lỗi khi lưu dữ liệu vào cơ sở dữ liệu.' });
+        }
+
+        // Phản hồi thành công nếu chèn dữ liệu thành công
+        res.json({ success: true, message: 'Dữ liệu đã được lưu thành công!' });
+    });
+});
