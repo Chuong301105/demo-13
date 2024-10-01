@@ -477,7 +477,78 @@ loginForm.addEventListener('submit', function (event) {
     });
 
 })})
+document.addEventListener('DOMContentLoaded', function() {
+    const bookButton = document.querySelector('.book-button');  // Nút "Book ngay"
+    const serviceForm = document.getElementById('serviceForm');  // Form dịch vụ
+    const mainContent = document.getElementById('mainContent'); // Phần nội dung trang
+    const navbar = document.querySelector('.navbar'); // Thanh điều hướng (navbar)
+
+    if (bookButton) {
+        bookButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            serviceForm.style.display = 'block';  // Hiển thị form khi nhấn nút "Book ngay"
+            mainContent.classList.add('blur-background');  // Làm mờ nội dung trang
+            navbar.classList.add('blur-background');  // Làm mờ thanh điều hướng
+        });
+    }
+
+    // Đóng form và xóa hiệu ứng mờ khi cần
+    const closeButton = document.querySelector('.close-form'); // Giả sử có nút đóng form
+
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            serviceForm.style.display = 'none';  // Ẩn form
+            mainContent.classList.remove('blur-background');  // Gỡ lớp mờ khỏi nội dung trang
+            navbar.classList.remove('blur-background');  // Gỡ lớp mờ khỏi thanh điều hướng
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const bookButton = document.querySelector('.book-button');  // Nút "Book ngay"
+    const serviceForm = document.getElementById('serviceForm');  // Form dịch vụ
+    const receiptModal = document.getElementById('receipt-modal');  // Modal receipt
+    const mainContent = document.getElementById('mainContent');  // Phần nội dung trang
+    const navbar = document.querySelector('.navbar');  // Thanh điều hướng (navbar)
+    const orderButton = document.getElementById('order-btn');  // Nút "Order"
+
+    // Hiển thị form và làm mờ nội dung khi nhấn "Book ngay"
+    if (bookButton) {
+        bookButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            serviceForm.style.display = 'block';  // Hiển thị form dịch vụ
+            mainContent.classList.add('blur-background');  // Làm mờ nội dung trang
+            navbar.classList.add('blur-background');  // Làm mờ thanh điều hướng
+        });
+    }
+
+    // Khi nhấn nút "Order" trong receipt form
+    if (orderButton) {
+        orderButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            // Ẩn cả form dịch vụ và receipt form
+            serviceForm.style.display = 'none';
+            receiptModal.style.display = 'none';
+
+            // Gỡ bỏ hiệu ứng mờ
+            mainContent.classList.remove('blur-background');
+            navbar.classList.remove('blur-background');
+        });
+    }
+
+    // Nếu bạn có nút để đóng form và receipt, hãy sử dụng logic tương tự để ẩn form và bỏ lớp mờ
+    const closeButton = document.querySelector('.close-form'); // Giả sử có nút đóng form
+
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            serviceForm.style.display = 'none';  // Ẩn form dịch vụ
+            receiptModal.style.display = 'none';  // Ẩn receipt form
+
+            // Gỡ lớp mờ khỏi nội dung trang và navbar
+            mainContent.classList.remove('blur-background');
+            navbar.classList.remove('blur-background');
+        });
+    }
+});
 
     
-
-
