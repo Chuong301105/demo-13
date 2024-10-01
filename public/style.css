@@ -67,6 +67,10 @@ nav {
 }
 /* Định dạng thanh menu */
 .navbar {
+    position: fixed; /* Cố định navbar ở đầu trang */
+    top: 0;
+    left: 0;
+    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
     background-color: #00b4ff; /* Màu nền xanh */
     display: flex;
     justify-content: space-between;
@@ -552,6 +556,66 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
     color: #333;
 }
+/* Hiệu ứng mờ */
+.blur-background {
+    filter: blur(5px); /* Độ mờ */
+    pointer-events: none; /* Ngăn chặn tương tác với phần bị mờ */
+}
+/* Hiệu ứng mờ cho nội dung trang và navbar */
+.blur-background {
+    filter: blur(5px); /* Hiệu ứng mờ */
+    pointer-events: none; /* Ngăn người dùng tương tác với phần bị mờ */
+}
 
+#serviceForm {
+    position: fixed; /* Giữ form cố định khi cuộn */
+    left: 50%; /* Căn form cách lề trái 10px */
+    top: 50%; /* Điều chỉnh vị trí của form */
+    width: 450px; /* Tăng chiều rộng của form */
+    transform: translate(-50%, -50%);  /* Dịch chuyển form để căn giữa */
+    background-color: white; /* Màu nền trắng */
+    padding: 20px; /* Tăng khoảng cách padding bên trong form */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    border-radius: 10px; /* Bo góc của form */
+    display: none; /* Mặc định ẩn form */
+    z-index: 1001; /* Đảm bảo form luôn hiển thị trên các phần tử khác */
+}
 
+#serviceForm input,
+#serviceForm select,
+#serviceForm textarea {
+    width: 100%; /* Các input chiếm toàn bộ chiều rộng của form */
+    margin-bottom: 15px; /* Tăng khoảng cách giữa các phần tử trong form */
+    padding: 10px; /* Tăng padding bên trong input */
+    border: 1px solid #ccc; /* Đường viền nhạt cho các input */
+    border-radius: 5px; /* Bo góc các input */
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều rộng */
+}
+
+#serviceForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; /* Đảm bảo label nằm trên các input */
+}
+
+#serviceForm .checkbox-group {
+    display: flex;
+    justify-content: space-between; /* Sắp xếp các checkbox trên cùng một hàng */
+    margin-bottom: 15px; /* Khoảng cách dưới nhóm checkbox */
+}
+
+#serviceForm button {
+    width: 100%; /* Nút gửi chiếm toàn bộ chiều rộng */
+    padding: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px; /* Bo góc nút gửi */
+}
+
+#serviceForm button:hover {
+    background-color: #ff4757; /* Màu nút khi hover */
+}
 
